@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch NumberOfIslands",
+            "request": "launch",
+            "mainClass": "DC.NumberOfIslands",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
+            "name": "Launch PacificAltanticWaterFlow",
+            "request": "launch",
+            "mainClass": "DC.PacificAltanticWaterFlow",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
+            "name": "Launch rotateMatrix",
+            "request": "launch",
+            "mainClass": "DC.rotateMatrix",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
+            "name": "Launch ClimbingStairs",
+            "request": "launch",
+            "mainClass": "DP.ClimbingStairs",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
+            "name": "Launch FrogJump",
+            "request": "launch",
+            "mainClass": "DP.FrogJump",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
+            "name": "Launch MissAlpha",
+            "request": "launch",
+            "mainClass": "Skillrack.MissAlpha",
+            "projectName": "Leetcode_3ad90aa0"
+        }
+    ]
+}
