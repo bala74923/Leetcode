@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch NoOfConsecutiveDifferences",
+            "request": "launch",
+            "mainClass": "DC.NoOfConsecutiveDifferences",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
