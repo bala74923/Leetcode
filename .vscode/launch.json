@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch FrogJumpWithKDIstance",
+            "request": "launch",
+            "mainClass": "DP.FrogJumpWithKDIstance",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
+            "name": "Launch FrogJumpWithDistanceK",
+            "request": "launch",
+            "mainClass": "DP.FrogJumpWithDistanceK",
+            "projectName": "Leetcode_3ad90aa0"
+        },
+        {
+            "type": "java",
             "name": "Launch NoOfConsecutiveDifferences",
             "request": "launch",
             "mainClass": "DC.NoOfConsecutiveDifferences",

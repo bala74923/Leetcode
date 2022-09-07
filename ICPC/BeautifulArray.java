@@ -1,4 +1,4 @@
-package Contest;
+package ICPC;
 
 public class BeautifulArray {
 
