@@ -1,4 +1,8 @@
-class Solution {
+package DC;
+import java.util.ArrayList;
+import java.util.List;
+
+class InorderTraversal {
    List<Integer> list ;
     public List<Integer> inorderTraversal(TreeNode root) {
         list = new ArrayList<>();
@@ -12,3 +16,4 @@ class Solution {
         go(root.right);
     }
 }
+
