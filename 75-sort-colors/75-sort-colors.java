@@ -1,12 +1,21 @@
 class Solution {
     public void sortColors(int[] nums) {
-        int[] count = new int[3];
-        for(int n: nums) count[n]++;
-        // cumulative frequency
-        for(int i=1;i<=2;i++) count[i]+=count[i-1];
-        int[] narr = nums.clone();
-        for(int i=nums.length-1;i>=0;i--){
-            nums[--count[narr[i]]] = narr[i];
+       int N = nums.length;
+        int lo = 0,hi = N-1,mid=0;
+        while(mid<=hi){
+            if(nums[mid]==0){
+                // swap it to left border
+                swap(lo++,mid++,nums);
+            }else if(nums[mid]==1){
+                mid++;
+            }else{
+                swap(mid,hi--,nums);
+            }
         }
+    }
+    void swap(int i,int j,int[] nums){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
