@@ -6,8 +6,8 @@
 6. now swap these two elements i, ele
 7. now reverse array reverse(arr,i+1,n-1)
 8. return the array
-​
-*intutution:
+ 
+ intutution:
 *   select the descending order you cannot make it more greater as it is already in descending order
 *   so swap i with smallest ele that is arr[ele]>=arr[i]
 *   now reverse the array from i+1,to n we get next permutation
