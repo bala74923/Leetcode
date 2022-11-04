@@ -18,11 +18,10 @@ class Solution {
         while(!q.isEmpty()){
             int front = q.poll();
             for(int adj: graph[front]){
-                if(color[adj]!=-1){
-                    if(color[adj]==color[front]) return false;
-                }else{
+                if(color[adj]==color[front]) return false;
+                else if(color[adj]==-1){
+                    color[adj] = 1^color[front];
                     q.add(adj);
-                    color[adj] = color[front]^1;// different
                 }
             }
         }
