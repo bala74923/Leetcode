@@ -17,10 +17,6 @@ class Solution {
         }
         list.add(new int[]{start,end});
         
-        
-        int[][] res = new int[list.size()][2];
-        for(int i=0;i<list.size();i++)
-            res[i] = list.get(i);
-        return res;
+        return list.toArray(new int[list.size()][2]);
     }
 }
