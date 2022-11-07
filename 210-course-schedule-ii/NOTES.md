@@ -12,9 +12,12 @@ adjacency list is
 * this is because after studying 0 you can go to 1 and 2
 * same goes ,after studying 1 you can study 3
 * after studying 2 you can study 3*
-​
+
+
 think how cycle occurs here
-[https://drive.google.com/file/d/1dfo87BtVXtLb79dtBs_7GXDDVJQAV71F/view?usp=share_link](http://)
-[https://drive.google.com/file/d/1KEwmSwkPdTWomlmhZaR-ocQeD-NWSned/view?usp=share_link](http://)
+
+https://drive.google.com/file/d/1dfo87BtVXtLb79dtBs_7GXDDVJQAV71F/view?usp=share_link
+
+https://drive.google.com/file/d/1KEwmSwkPdTWomlmhZaR-ocQeD-NWSned/view?usp=share_link
 ​
 ​
