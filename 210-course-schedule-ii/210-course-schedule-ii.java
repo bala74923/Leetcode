@@ -28,21 +28,21 @@ class Solution {
             }
         }
         //System.out.println(topo);
-        if(ind!=V) return new int[0];
-        int lo = 0,hi = ind-1;
-        while(lo<hi){
-            int temp = topo[lo];
-            topo[lo] = topo[hi];
-            topo[hi] = temp;
-            lo++;hi--;
-        }
+         if(ind!=V) return new int[0];
+        // int lo = 0,hi = ind-1;
+        // while(lo<hi){
+        //     int temp = topo[lo];
+        //     topo[lo] = topo[hi];
+        //     topo[hi] = temp;
+        //     lo++;hi--;
+        // }
         return topo;
     }
     static List<List<Integer>> getList(int V,int[][] arr){
         List<List<Integer>> list = new ArrayList<>(V);
         for(int i=0;i<V;i++) list.add(new ArrayList<>());
         for(int[] e: arr){
-            list.get(e[0]).add(e[1]);
+            list.get(e[1]).add(e[0]);
         }
         return list;
     }
