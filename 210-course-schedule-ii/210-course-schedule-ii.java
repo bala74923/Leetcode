@@ -43,6 +43,8 @@ class Solution {
         for(int i=0;i<V;i++) list.add(new ArrayList<>());
         for(int[] e: arr){
             list.get(e[1]).add(e[0]);
+            // to take e[0], e[1] is pre requiste
+            // e[1]->e[0]
         }
         return list;
     }
