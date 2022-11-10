@@ -1,37 +1,31 @@
-class Pair{
-    String str;
-    int val;
-    Pair(String str,int val){this.str=  str;this.val = val;}
-    
-}
 class Solution {
-    int max = (int)1e9;
-    public int ladderLength(String beginWord, String endWord, List<String> list) {
-        int N = list.size();
-        boolean[] visited =new boolean[N];
-        
-        Queue<Pair> q= new LinkedList<>();
-        q.add(new Pair(beginWord,1));
-        
+    public int ladderLength(String b, String e, List<String> list) {
+        Set<String> set= new HashSet<>(list);
+        Queue<String> q = new LinkedList<>();
+        int level=1;
+        q.add(b);
         while(!q.isEmpty()){
-            Pair front = q.poll();
-            if(front.str.equals(endWord)) return front.val;
-            for(int i=0;i<N;i++){
-                if(!visited[i] && check(front.str,list.get(i))){
-                    // comparable or not
-                        q.add(new Pair(list.get(i),front.val+1));
-                        visited[i] = true;
+            int size=  q.size();
+            while(size-->0){
+                String front = q.poll();
+                if(front.equals(e)) return level;
+                int len = front.length();
+                char[] arr = front.toCharArray();
+                for(int ind=0;ind<len;ind++){
+                    char temp = arr[ind];
+                    for(char c='a';c<='z';c++){
+                        arr[ind] = c;
+                        String curr= new String(arr);
+                        if(set.contains(curr)){
+                            q.add(curr);
+                            set.remove(curr);
+                        }
+                    }
+                    arr[ind] = temp;
                 }
             }
+            ++level;
         }
         return 0;
-    }
-    static boolean check(String s1,String s2){
-        int count = 0;
-        for(int i=0;i<s1.length();i++){
-            if(s1.charAt(i)!=s2.charAt(i)) 
-                count++;
-        }
-        return count<=1;
     }
 }
