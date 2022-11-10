@@ -29,7 +29,7 @@ class Solution {
                 }
             }
         }
-        System.out.println(Arrays.toString(dist));
+        //System.out.println(Arrays.toString(dist));
         
         for(int i=0;i<N;i++){
             if(list.get(i).equals(endWord))
