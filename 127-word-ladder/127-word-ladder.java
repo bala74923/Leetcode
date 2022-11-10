@@ -8,32 +8,21 @@ class Solution {
     int max = (int)1e9;
     public int ladderLength(String beginWord, String endWord, List<String> list) {
         int N = list.size();
-        int[] dist = new int[N];
-        for(int i=0;i<N;i++){
-            dist[i] = max;
-        }
+        boolean[] visited =new boolean[N];
         
         Queue<Pair> q= new LinkedList<>();
-        q.add(new Pair(beginWord,0));
+        q.add(new Pair(beginWord,1));
         
         while(!q.isEmpty()){
             Pair front = q.poll();
+            if(front.str.equals(endWord)) return front.val;
             for(int i=0;i<N;i++){
-                if(check(front.str,list.get(i))){
+                if(!visited[i] && check(front.str,list.get(i))){
                     // comparable or not
-                    
-                    if(dist[i]>front.val+1){
-                        dist[i] = front.val+1;
-                        q.add(new Pair(list.get(i),dist[i]));
-                    }
+                        q.add(new Pair(list.get(i),front.val+1));
+                        visited[i] = true;
                 }
             }
-        }
-        //System.out.println(Arrays.toString(dist));
-        
-        for(int i=0;i<N;i++){
-            if(list.get(i).equals(endWord))
-                return dist[i]==max?0: dist[i]+1;
         }
         return 0;
     }
