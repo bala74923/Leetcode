@@ -12,12 +12,28 @@ class Solution {
             }
         }
         
-        return rec(len-1,n,list);
+        int[][] dp = new int[len+1][n+1];
+        
+        // dp[ind][sum]
+        for(int sum=1;sum<=n;sum++)
+            dp[0][sum] = max;
+        for(int ind=1;ind<=len;ind++){
+            for(int sum=1;sum<=n;sum++){
+                int pick = max;
+                if(sum>=list.get(ind-1)){
+                    pick = 1+ dp[ind][sum-list.get(ind-1)];
+                }
+                int notPick = dp[ind-1][sum];
+                dp[ind][sum] = Math.min(pick,notPick);
+            }
+        }
+        //return rec(len-1,n,list);
+        return dp[len][n];
     }
     static int max = (int)1e9;
     // minimum number sum
     static int rec(int ind,int sum,List<Integer> list){
-        if(ind==-1){
+        if(ind==0){
             return sum==0?0:max;
         }
         if(sum==0) return 0;
@@ -25,8 +41,8 @@ class Solution {
             return memo[ind][sum];
         
         int pick = max;
-        if(sum>=list.get(ind)){
-            pick = 1+ rec(ind,sum-list.get(ind),list);
+        if(sum>=list.get(ind-1)){
+            pick = 1+ rec(ind,sum-list.get(ind-1),list);
         }
         int notPick = rec(ind-1,sum,list);
         return memo[ind][sum] = Math.min(pick,notPick);
