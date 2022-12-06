@@ -15,15 +15,17 @@ class Solution {
         ListNode temp = head;
         int index = 0;
         while(temp!=null){
+            ListNode nextNode = temp.next;
+            temp.next = null; // as going to add in new list
             if(index%2==0){
                 //odd
-                otemp.next = new ListNode(temp.val);
+                otemp.next = temp;
                 otemp = otemp.next;
             }else{
-                etemp.next = new ListNode(temp.val);
+                etemp.next = temp;
                 etemp = etemp.next;
             }
-            temp = temp.next;index++;
+            temp = nextNode;index++;
         }
         otemp.next = even.next;
         return odd.next;
