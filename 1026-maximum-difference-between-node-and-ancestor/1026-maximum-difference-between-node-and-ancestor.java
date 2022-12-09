@@ -19,12 +19,12 @@ class Solution {
         return maxDiff(root,root.val,root.val);
     }
     int maxDiff(TreeNode root,int max,int min){
-        if(root==null) return 0;
+        if(root==null) return max-min;
         max = Math.max(max,root.val);
         min = Math.min(min,root.val);
         int left = maxDiff(root.left,max,min);
         int right = maxDiff(root.right,max,min);
         int curr =  max-min;
-        return Math.max(curr,Math.max(left,right));
+        return Math.max(left,right);
     }
 }
