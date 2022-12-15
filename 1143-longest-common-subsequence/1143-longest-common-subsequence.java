@@ -4,7 +4,6 @@ class Solution {
     }
     int solve(String s1,String s2){
         int n1 = s1.length(), n2 = s2.length();
-        int[][] dp = new int[n1+1][n2+1];
         int[] prev = new int[n2+1];
         for(int i=1;i<=n1;i++){
             int[] curr = new int[n2+1];
