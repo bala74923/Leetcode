@@ -40,9 +40,11 @@ class Solution {
         Queue<int[]> q = new LinkedList<>();
         int mod = (int)1e5;
         
-        int[] dp= new int[mod+1];
-        dp[start] = 0;
-        Arrays.fill(dp,int_max);
+        //int[] dp= new int[mod+1];
+        boolean[] visited= new boolean[mod+1];
+        visited[start] = true;
+        //dp[start] = 0;
+        //Arrays.fill(dp,int_max);
         q.add(new int[]{0,start});
         
         while(!q.isEmpty()){
@@ -50,8 +52,10 @@ class Solution {
             int step = front[0], curr = front[1];
             for(int adj: arr){
                 int mul  = (adj*curr)%mod;
-                if(dp[mul] > step+1){
-                    dp[mul] = step+1;
+                if(!visited[mul]){
+                    visited[mul] = true;
+                //if(dp[mul] > step+1){
+                    //dp[mul] = step+1;
                     if(mul==end) return step+1;
                     q.add(new int[]{step+1,mul});
                 }
