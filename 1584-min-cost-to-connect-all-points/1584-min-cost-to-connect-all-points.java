@@ -8,11 +8,15 @@ class Solution {
         }
         int[] dsuf = new int[points.length];
         Arrays.fill(dsuf,-1);
-        int mst_sum = 0;
+        int mst_sum = 0, count = 0;
         while(!pq.isEmpty()){
             int[] front = pq.poll();
-            if(union(front[1],front[2],dsuf))
+            if(union(front[1],front[2],dsuf)){
                 mst_sum+=front[0];
+                count++;
+                if(count==points.length-1)
+                    break;
+            }
         }
         return mst_sum;
     }
