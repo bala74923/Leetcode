@@ -1,58 +1,47 @@
-class Pair{
-    String first;
-    double second;
-    Pair(String first, double second){
-        this.first = first;
-        this.second = second;
-    }
-}
 class Solution {
+    double int_max = (int)1e3;
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        // create graph from nodes and values
-        Map<String, List<Pair>> map = graph(equations, values);
-        double[] res = new double[queries.size()];
+        Set<String> cands = new HashSet<>();
+        Map<List<String>,Double> map = new HashMap<>();
+        // diagonals are 1, default is int_max
+        int N = values.length;
+        for(int i=0;i<N;i++){
+            String from = equations.get(i).get(0) , to= equations.get(i).get(1);
+            double dist = values[i];
+            
+            map.put(hash(from,to), dist);
+            map.put(hash(to,from),1/dist);
+            
+            cands.add(from);cands.add(to);
+        }
+        
+        for(String i: cands){
+            map.put( hash(i,i), 1.0); // for self loop;
+        }
+        
+        for(String k: cands){
+            for(String i: cands){
+                for(String j: cands){
+                    double dist = map.getOrDefault(hash(i,j),int_max);
+                    double ik = map.getOrDefault(hash(i,k),int_max);
+                    double kj =  map.getOrDefault(hash(k,j),int_max);
+                    if(ik!=int_max && kj!=int_max && dist> ik*kj){
+                        map.put(hash(i,j), ik*kj);
+                    }
+                }
+            }
+        }
+        int size = queries.size();
+        double[] res = new double[size];
         int index = 0;
         for(List<String> q: queries){
-            String from = q.get(0), to = q.get(1);
-            if(map.get(from)==null || map.get(to)==null )
-                res[index++] = -1.0;
-            else 
-                res[index++] = Math.max( dfs( from, to, new HashSet<>(), map) ,-1);
+            res[index++] = map.getOrDefault(q,-1.0);
         }
         return res;
     }
-    double int_min = -(int)1e9;
-    double dfs(String curr,String des,Set<String> visited,
-               Map<String,List<Pair>> map){
-        //System.out.println(curr+" = curr , des = "+des);
-        if(curr.equals(des)) return 1.0;
-        if(visited.contains(curr)) return int_min; // this will neglect the wron answer
-        visited.add(curr);
-        double res = int_min;
-        
-        for(Pair adj: map.get(curr)){
-            String adj_node = adj.first;
-            double dist = adj.second;
-            double calc = dist* dfs( adj_node, des, visited,map);
-            res = Math.max(res, calc);
-        }
-        return res;
-    }
-    Map<String,List<Pair>> graph(List<List<String>> edges,double[] v){
-        int N = v.length;
-        Map<String,List<Pair>>  map = new HashMap<>();
-        for(int i=0;i<N;i++){
-            double dist = v[i];
-            String from = edges.get(i).get(0), to = edges.get(i).get(1);
-            
-            List<Pair> list1 = map.getOrDefault(from, new ArrayList<>());
-            list1.add( new Pair(to, dist));
-            map.put( from, list1);
-            
-            List<Pair> list2 = map.getOrDefault(to, new ArrayList<>());
-            list2.add( new Pair(from, 1/dist));
-            map.put( to , list2);
-        }
-        return map;
+    List<String> hash(String a,String b){
+        List<String> list = new ArrayList<>();
+        list.add(a); list.add(b);
+        return list;
     }
 }
