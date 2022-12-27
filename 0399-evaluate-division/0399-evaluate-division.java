@@ -1,58 +1,58 @@
-class pair{
+class Pair{
     String first;
     double second;
-    pair(String first,double second){this.first = first;this.second = second;}
-}
-class node{
-    String first;
-    double second;
-    node(String first,double second){this.first = first;this.second = second;}
+    Pair(String first, double second){
+        this.first = first;
+        this.second = second;
+    }
 }
 class Solution {
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        Map<String,List<pair>> map = new HashMap<>();
-        for(int i=0;i<values.length;i++){
-            String from = equations.get(i).get(0), to = equations.get(i).get(1);
-            double val = values[i];
-            List<pair> sub = map.getOrDefault(from,new ArrayList<>());
-            sub.add( new pair(to, val));
-            map.put(from , sub);
-            
-            List<pair> sub2 = map.getOrDefault(to, new ArrayList<>());
-            sub2.add(new pair(from ,1/val));
-            map.put( to, sub2);
-        }
-        //System.out.println(map);
-        
-        int qn = queries.size();
-        double[] res = new double[qn];
+        // create graph from nodes and values
+        Map<String, List<Pair>> map = graph(equations, values);
+        double[] res = new double[queries.size()];
         int index = 0;
-       for(List<String> qu: queries){
-           String from = qu.get(0), des = qu.get(1);
-           Set<String> vis = new HashSet<>();
-           if(!des.equals(from)) vis.add(from);
-           boolean found = false;
-           Queue<node> q = new LinkedList<>();q.add( new node(from,1));
-           while(!q.isEmpty()){
-               node front = q.poll();
-               if(front.first.equals(des) && vis.contains(front.first)){
-                   res[index] = front.second;
-                   //System.out.printf(" from=%s  des=%s curr=%s mul = %f\n",from,des,front.first,front.second);
-                   found = true;
-                   break;
-               }
-               double upto_dist =front.second;
-               for(pair adj: map.getOrDefault(front.first, new ArrayList<>())){
-                   String f = adj.first;
-                   double ndist = adj.second * upto_dist;
-                   if(vis.add(f)){ //  not visited already
-                       q.add(new node(f, ndist));
-                   }
-               }
-           }
-           if(!found) res[index] = -1.0;
-           index++;
-       }
+        for(List<String> q: queries){
+            String from = q.get(0), to = q.get(1);
+            if(map.get(from)==null || map.get(to)==null )
+                res[index++] = -1.0;
+            else 
+                res[index++] = Math.max( dfs( from, to, new HashSet<>(), map) ,-1);
+        }
         return res;
+    }
+    double int_min = -(int)1e9;
+    double dfs(String curr,String des,Set<String> visited,
+               Map<String,List<Pair>> map){
+        //System.out.println(curr+" = curr , des = "+des);
+        if(curr.equals(des)) return 1.0;
+        if(visited.contains(curr)) return int_min; // this will neglect the wron answer
+        visited.add(curr);
+        double res = int_min;
+        
+        for(Pair adj: map.get(curr)){
+            String adj_node = adj.first;
+            double dist = adj.second;
+            double calc = dist* dfs( adj_node, des, visited,map);
+            res = Math.max(res, calc);
+        }
+        return res;
+    }
+    Map<String,List<Pair>> graph(List<List<String>> edges,double[] v){
+        int N = v.length;
+        Map<String,List<Pair>>  map = new HashMap<>();
+        for(int i=0;i<N;i++){
+            double dist = v[i];
+            String from = edges.get(i).get(0), to = edges.get(i).get(1);
+            
+            List<Pair> list1 = map.getOrDefault(from, new ArrayList<>());
+            list1.add( new Pair(to, dist));
+            map.put( from, list1);
+            
+            List<Pair> list2 = map.getOrDefault(to, new ArrayList<>());
+            list2.add( new Pair(from, 1/dist));
+            map.put( to , list2);
+        }
+        return map;
     }
 }
