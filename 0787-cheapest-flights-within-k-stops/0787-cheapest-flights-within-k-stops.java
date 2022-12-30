@@ -7,11 +7,12 @@ class Solution {
         dp[src] = 0;
         // here stops increase unit wise so use queue
         //{stops , cost, node}
-        PriorityQueue<int[]> pq = 
-            new PriorityQueue<>(
-            (a,b)->a[0]==b[0]?a[1]-b[1]:a[0]-b[0]);
-        pq.add(new int[]{0,0,src});
-        
+        // PriorityQueue<int[]> pq = 
+        //     new PriorityQueue<>(
+        //     (a,b)->a[0]==b[0]?a[1]-b[1]:a[0]-b[0]);
+        // pq.add(new int[]{0,0,src});
+        Queue<int[]> pq = new LinkedList<>();
+        pq.add( new int[]{0, 0 ,src});
         while(!pq.isEmpty()){
             int[] front = pq.poll();
             int node = front[2], stp = front[0], cost = front[1];
