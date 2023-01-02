@@ -1,4 +1,5 @@
 class Solution {
+    int[][] dirs ={{-1,0},{0,-1},{1,0},{0,1}};
     public int regionsBySlashes(String[] grid) {
         int m = grid.length, n = grid[0].length();
         int X = m*3, Y = n*3, jump =3 ;
@@ -38,7 +39,7 @@ class Solution {
         if(i<0 || j<0 || i>=mat.length || j>=mat[0].length ||
           vis[i][j] || mat[i][j] == 1) return;
         vis[i][j] = true;
-        dfs(mat,vis,i-1,j);dfs(mat,vis,i,j-1);
-        dfs(mat,vis,i+1,j);dfs(mat,vis,i,j+1);
+       for(int[] dir: dirs)
+           dfs(mat,vis, i+dir[0],j+dir[1]);
     }
 }
