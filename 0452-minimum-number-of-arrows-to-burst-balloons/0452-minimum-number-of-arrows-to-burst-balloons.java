@@ -6,7 +6,7 @@ class Solution {
         for(int i=1;i<points.length;i++){
             int s = points[i][0], e = points[i][1];
             if(s<=new_end){
-                System.out.println(i+" ns = "+new_start+" ne ="+new_end);
+                //System.out.println(i+" ns = "+new_start+" ne ="+new_end);
                 new_start = Math.min(new_start,s);
                 new_end = Math.min(new_end, e);
             }else{
