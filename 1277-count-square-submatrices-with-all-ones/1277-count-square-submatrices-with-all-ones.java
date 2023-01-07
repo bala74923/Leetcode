@@ -1,21 +1,17 @@
 class Solution {
     public int countSquares(int[][] matrix) {
-        int m = matrix.length, n= matrix[0].length;
-        int res = 0;
-        for(int start_col = 0;start_col<n;start_col++){
-            boolean[] bool = new boolean[m];
-            for(int i=0;i<m;i++)
-                bool[i] = true;
-            for(int end_col = start_col;end_col<n;end_col++){
-                // track the continous rows that has 1's
-                int count = 0,max_count = 0;
-                int len = end_col-start_col+1;
-                for(int row = 0;row<m;row++){
-                    bool[row] = bool[row]&(matrix[row][end_col]==1);
-                    if(bool[row]) count++;
-                    else count = 0;
-                    if(count>=len) res++;
+        int m = matrix.length, n = matrix[0].length;
+        for(int i=1;i<m;i++){
+            for(int j =1;j<n;j++){
+                if(matrix[i][j] ==1 ){
+                    matrix[i][j]+= Math.min(matrix[i][j-1],Math.min(matrix[i-1][j],matrix[i-1][j-1]));
                 }
+            }
+        }
+        int res = 0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                res+= matrix[i][j];
             }
         }
         return res;
