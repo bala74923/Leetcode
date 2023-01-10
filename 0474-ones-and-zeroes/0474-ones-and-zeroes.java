@@ -4,21 +4,21 @@ class Solution {
     int[][][] dp ;
     public int findMaxForm(String[] strs, int m, int n) {
         int N = strs.length;
-        dp= new int[N][m+1][n+1];
+        dp= new int[N+1][m+1][n+1];
         for(int[][] dp1: dp){
             for(int[] dp2: dp1)
                 Arrays.fill(dp2, -1);
         }
-        return f(N-1, m,n,strs);
+        return f(N, m,n,strs);
     }
     int f(int ind, int m,int n,String[] strs){
-        if(ind == -1){
+        if(ind == 0){
             return 0;
         }
         if(dp[ind][m][n]!=-1)
             return dp[ind][m][n];
         int zeros  = 0,ones = 0;
-        for(char c: strs[ind].toCharArray()){
+        for(char c: strs[ind-1].toCharArray()){
             if(c=='0') zeros ++;
             else ones++;
         }
