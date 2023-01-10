@@ -4,29 +4,26 @@ class Solution {
     int[][][] dp ;
     public int findMaxForm(String[] strs, int m, int n) {
         int N = strs.length;
-        dp= new int[N+1][m+1][n+1];
-        for(int[][] dp1: dp){
-            for(int[] dp2: dp1)
-                Arrays.fill(dp2, -1);
+       
+        int[][][] dp = new int[N+1][m+1][n+1];
+        for(int ind = 1; ind<=N;ind++){
+            for(int _m =0;_m<= m; _m++){
+                for(int _n=0; _n<=n ; _n++){
+                    int zeros  = 0,ones = 0;
+                    for(char c: strs[ind-1].toCharArray()){
+                        if(c=='0') zeros ++;
+                        else ones++;
+                    }
+                    int pick = int_min;
+                    if(zeros<=_m && ones<= _n){
+                        pick = 1+ dp[ind-1][_m-zeros][_n-ones];
+                    }
+                    int not_pick = dp[ind-1][_m][_n];
+                    dp[ind][_m][_n] = Math.max(pick,not_pick);
+                }
+            }
         }
-        return f(N, m,n,strs);
+        return dp[N][m][n];
     }
-    int f(int ind, int m,int n,String[] strs){
-        if(ind == 0){
-            return 0;
-        }
-        if(dp[ind][m][n]!=-1)
-            return dp[ind][m][n];
-        int zeros  = 0,ones = 0;
-        for(char c: strs[ind-1].toCharArray()){
-            if(c=='0') zeros ++;
-            else ones++;
-        }
-        int pick = int_min;
-        if(zeros<=m && ones<= n){
-            pick = 1+ f(ind-1, m-zeros, n-ones,strs);
-        }
-        int not_pick = f(ind-1,m,n,strs);
-        return dp[ind][m][n] = Math.max(pick,not_pick);
-    }
+    
 }
